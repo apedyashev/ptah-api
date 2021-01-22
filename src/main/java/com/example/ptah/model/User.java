@@ -36,7 +36,7 @@ public class User implements UserDetails {
     private Long id;
     @Column(nullable = false, columnDefinition = "VARCHAR(15)")
     private String username;
-    @Column(nullable = false, columnDefinition = "VARCHAR(20)", unique = true)
+    @Column(nullable = false, columnDefinition = "VARCHAR(50)", unique = true)
     private String email;
     private String password;
     private Boolean locked = false;

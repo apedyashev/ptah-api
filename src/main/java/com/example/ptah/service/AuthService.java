@@ -35,7 +35,7 @@ public class AuthService {
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
-        user.setEnabled(false);
+        user.setEnabled(true); // TODO:
         user.setRole(UserRole.USER);
 
         String token = userService.signUpUser(user);

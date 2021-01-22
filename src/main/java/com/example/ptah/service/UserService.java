@@ -1,15 +1,13 @@
 package com.example.ptah.service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
-import com.example.ptah.dao.UserDao;
 import com.example.ptah.model.ConfirmationToken;
 import com.example.ptah.model.User;
 import com.example.ptah.repository.UserRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,16 +21,8 @@ import lombok.AllArgsConstructor;
 public class UserService implements UserDetailsService {
     private final static String USER_NOT_FOUND = "User with email %s not found";
     private final UserRepository userRepository;
-    // private final UserDao userDao;
     private final BCryptPasswordEncoder passwordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
-
-    // @Autowired
-    // UserService(@Qualifier("dbUserDao") UserDao userDao, BCryptPasswordEncoder
-    // passwordEncoder) {
-    // this.userDao = userDao;
-    // this.passwordEncoder = passwordEncoder;
-    // }
 
     public User create(User user) {
         return userRepository.save(user);
@@ -55,7 +45,6 @@ public class UserService implements UserDetailsService {
 
         userRepository.save(user);
 
-        // TODO: Send confirmation token
         ConfirmationToken token = new ConfirmationToken();
         token.setToken(UUID.randomUUID().toString());
         token.setCreatedAt(LocalDateTime.now());
@@ -71,4 +60,13 @@ public class UserService implements UserDetailsService {
     public int enableUser(String email) {
         return userRepository.enableUser(email);
     }
+
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
 }

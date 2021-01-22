@@ -26,8 +26,8 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid @NonNull @RequestBody RegistrationRequest request) {
-        return authService.register(request);
+    public void register(@Valid @NonNull @RequestBody RegistrationRequest request) {
+        authService.register(request);
     }
 
     @PostMapping("/confirm")
