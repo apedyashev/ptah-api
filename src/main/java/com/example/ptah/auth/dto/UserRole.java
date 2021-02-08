@@ -1,4 +1,4 @@
-package com.example.ptah.dto;
+package com.example.ptah.auth.dto;
 
 public enum UserRole {
     USER, ADMIN

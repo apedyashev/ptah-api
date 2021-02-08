@@ -1,10 +1,9 @@
-package com.example.ptah.api;
+package com.example.ptah.auth;
 
 import javax.validation.Valid;
 
-import com.example.ptah.dto.ConfirmTokenRequest;
-import com.example.ptah.dto.RegistrationRequest;
-import com.example.ptah.service.AuthService;
+import com.example.ptah.auth.dto.ConfirmTokenRequest;
+import com.example.ptah.auth.dto.RegistrationRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

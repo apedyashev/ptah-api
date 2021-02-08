@@ -1,4 +1,4 @@
-package com.example.ptah.model;
+package com.example.ptah.user;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,7 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.example.ptah.dto.UserRole;
+import com.example.ptah.auth.dto.UserRole;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

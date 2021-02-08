@@ -1,4 +1,4 @@
-package com.example.ptah.dto;
+package com.example.ptah.auth.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

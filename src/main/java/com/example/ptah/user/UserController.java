@@ -1,12 +1,9 @@
-package com.example.ptah.api;
+package com.example.ptah.user;
 
 import java.security.Principal;
 import java.util.Optional;
 
 import javax.validation.Valid;
-
-import com.example.ptah.model.User;
-import com.example.ptah.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

@@ -1,14 +1,15 @@
-package com.example.ptah.service;
+package com.example.ptah.auth;
 
 import java.time.LocalDateTime;
 
 import javax.transaction.Transactional;
 
-import com.example.ptah.dto.RegistrationRequest;
-import com.example.ptah.dto.UserRole;
+import com.example.ptah.auth.dto.RegistrationRequest;
+import com.example.ptah.auth.dto.UserRole;
 import com.example.ptah.email.EmailSender;
-import com.example.ptah.model.ConfirmationToken;
-import com.example.ptah.model.User;
+import com.example.ptah.user.User;
+import com.example.ptah.user.EmailValidationService;
+import com.example.ptah.user.UserService;
 
 import org.springframework.stereotype.Service;
 
@@ -28,8 +29,6 @@ public class AuthService {
         if (!isEmailValid) {
             throw new IllegalStateException("email not valid");
         }
-
-        //
 
         User user = new User();
         user.setUsername(request.getUsername());

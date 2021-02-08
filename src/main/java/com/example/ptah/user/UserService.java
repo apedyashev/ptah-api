@@ -1,12 +1,11 @@
-package com.example.ptah.service;
+package com.example.ptah.user;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.example.ptah.model.ConfirmationToken;
-import com.example.ptah.model.User;
-import com.example.ptah.repository.UserRepository;
+import com.example.ptah.auth.ConfirmationTokenService;
+import com.example.ptah.auth.ConfirmationToken;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

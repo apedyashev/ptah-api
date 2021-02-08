@@ -3,7 +3,7 @@ package com.example.ptah.config;
 import com.example.ptah.jwt.JwtConfig;
 import com.example.ptah.jwt.JwtUsernamePasswordAuthenticationFilter;
 import com.example.ptah.jwt.JwtVerifier;
-import com.example.ptah.service.UserService;
+import com.example.ptah.user.UserService;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

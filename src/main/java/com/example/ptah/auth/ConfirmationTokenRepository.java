@@ -1,9 +1,7 @@
-package com.example.ptah.repository;
+package com.example.ptah.auth;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
-
-import com.example.ptah.model.ConfirmationToken;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

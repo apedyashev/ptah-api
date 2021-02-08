@@ -1,4 +1,4 @@
-package com.example.ptah.model;
+package com.example.ptah.auth;
 
 import java.time.LocalDateTime;
 
@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.example.ptah.user.User;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

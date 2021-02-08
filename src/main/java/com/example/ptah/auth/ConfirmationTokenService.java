@@ -1,10 +1,7 @@
-package com.example.ptah.service;
+package com.example.ptah.auth;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
-
-import com.example.ptah.model.ConfirmationToken;
-import com.example.ptah.repository.ConfirmationTokenRepository;
 
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.example.ptah.service;
+package com.example.ptah.user;
 
 import java.util.function.Predicate;
 
