@@ -20,6 +20,7 @@ public class RegistrationRequest {
     // https://javaee.github.io/javaee-spec/javadocs/javax/validation/constraints/package-summary.html
     @Email
     @NotBlank
+    @Size(max = 50)
     private String email;
 
     @NotBlank
@@ -32,5 +33,4 @@ public class RegistrationRequest {
 
     @NotBlank
     private String passwordConfirmation;
-    // TODO: confirmation password match check
 }
