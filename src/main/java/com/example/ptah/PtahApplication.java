@@ -29,6 +29,8 @@ public class PtahApplication {
 						.allowedOrigins("http://localhost:4200");
 				registry.addMapping("/api/v1/auth/register").allowedHeaders("*").exposedHeaders("*")
 						.allowedOrigins("http://localhost:4200");
+				registry.addMapping("/api/users/**").allowedHeaders("*").exposedHeaders("*")
+						.allowedOrigins("http://localhost:4200");
 			}
 		};
 	}

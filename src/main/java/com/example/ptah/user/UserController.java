@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.example.ptah.exception.NotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,8 +35,8 @@ public class UserController {
 
     @GetMapping(path = "{id}")
     @PreAuthorize("hasAnyRole('USER')")
-    public Optional<User> getById(@PathVariable("id") Long userId) {
-        return userService.findById(userId);
+    public User getById(@PathVariable("id") Long userId) {
+        return userService.findById(userId).orElseThrow(() -> new NotFoundException("User not found"));
     }
 
     @GetMapping("/me")

@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import com.example.ptah.auth.dto.UserRole;
 
@@ -34,6 +35,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_sequence")
     @Column(name = "id", updatable = false)
     private Long id;
+    @Size(min = 5, max = 15)
     @Column(nullable = false, columnDefinition = "VARCHAR(15)")
     private String username;
     @Column(nullable = false, columnDefinition = "VARCHAR(50)", unique = true)
