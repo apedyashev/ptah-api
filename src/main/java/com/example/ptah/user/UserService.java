@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.example.ptah.auth.ConfirmationTokenService;
+import com.example.ptah.exception.ValidationException;
 import com.example.ptah.auth.ConfirmationToken;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,15 +28,15 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws ValidationException {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND, email)));
     }
 
-    public String signUpUser(User user) {
+    public String signUpUser(User user) throws ValidationException {
         boolean userExists = userRepository.findByEmail(user.getEmail()).isPresent();
         if (userExists) {
-            throw new IllegalStateException("email already taken");
+            throw new ValidationException("email", "email already taken");
         }
 
         String encodedPassword = passwordEncoder.encode(user.getPassword());

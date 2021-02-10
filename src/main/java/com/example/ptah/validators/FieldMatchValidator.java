@@ -7,12 +7,13 @@ import org.springframework.beans.BeanWrapperImpl;
 
 // https://www.baeldung.com/spring-mvc-custom-validator
 // https://stackoverflow.com/a/2036195
-public class FieldsValueMatchValidator implements ConstraintValidator<FieldsValueMatch, Object> {
+public class FieldMatchValidator implements ConstraintValidator<FieldMatch, Object> {
     private String field;
     private String fieldMatch;
     private String message;
 
-    public void initialize(FieldsValueMatch constraintAnnotation) {
+    @Override
+    public void initialize(FieldMatch constraintAnnotation) {
         this.field = constraintAnnotation.field();
         this.fieldMatch = constraintAnnotation.fieldMatch();
         this.message = constraintAnnotation.message();

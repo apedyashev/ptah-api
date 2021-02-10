@@ -10,10 +10,10 @@ import javax.validation.Payload;
 
 // https://www.baeldung.com/spring-mvc-custom-validator
 
-@Constraint(validatedBy = FieldsValueMatchValidator.class)
+@Constraint(validatedBy = FieldMatchValidator.class)
 @Target({ ElementType.TYPE, ElementType.ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface FieldsValueMatch {
+public @interface FieldMatch {
     String message() default "Fields values don't match!";
 
     String field();
@@ -27,6 +27,6 @@ public @interface FieldsValueMatch {
     @Target({ ElementType.TYPE })
     @Retention(RetentionPolicy.RUNTIME)
     @interface List {
-        FieldsValueMatch[] value();
+        FieldMatch[] value();
     }
 }

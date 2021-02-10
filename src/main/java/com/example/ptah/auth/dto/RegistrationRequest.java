@@ -4,7 +4,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import com.example.ptah.validators.FieldsValueMatch;
+import com.example.ptah.validators.FieldMatch;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@FieldsValueMatch.List({
-        @FieldsValueMatch(field = "password", fieldMatch = "passwordConfirmation", message = "Passwords do not match!") })
+@FieldMatch.List({
+        @FieldMatch(field = "password", fieldMatch = "passwordConfirmation", message = "Passwords do not match!") })
 public class RegistrationRequest {
     // More here:
     // https://javaee.github.io/javaee-spec/javadocs/javax/validation/constraints/package-summary.html

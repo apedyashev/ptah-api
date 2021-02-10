@@ -36,6 +36,17 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * Handles custom ValidationException exceptions
+     */
+    @ExceptionHandler(ValidationException.class)
+    public final ResponseEntity<Object> handleValidationException(ValidationException ex) {
+        return new ResponseEntity(ex.asObject(), HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    /**
+     * Handles errors from annotations
+     */
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
             HttpHeaders headers, HttpStatus status, WebRequest request) {
