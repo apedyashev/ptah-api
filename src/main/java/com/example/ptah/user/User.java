@@ -36,7 +36,7 @@ public class User implements UserDetails {
     @Column(name = "id", updatable = false)
     private Long id;
 
-    @Size(min = 5, max = 15)
+    @Size(min = 2, max = 15)
     @Column(nullable = false, columnDefinition = "VARCHAR(15)")
     private String username;
 
@@ -74,4 +74,9 @@ public class User implements UserDetails {
         return enabled;
     }
 
+    @Override
+    public String getUsername() { // NOSONAR
+        // return email instead of username as email is used to authenticate user
+        return email;
+    }
 }

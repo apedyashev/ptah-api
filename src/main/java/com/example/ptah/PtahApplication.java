@@ -27,7 +27,7 @@ public class PtahApplication {
 				// TODO: allowed origin to config
 				registry.addMapping("/login").allowedHeaders("*").exposedHeaders("*")
 						.allowedOrigins("http://localhost:4200");
-				registry.addMapping("/api/v1/auth/register").allowedHeaders("*").exposedHeaders("*")
+				registry.addMapping("/api/v1/auth/**").allowedHeaders("*").exposedHeaders("*")
 						.allowedOrigins("http://localhost:4200");
 				registry.addMapping("/api/users/**").allowedHeaders("*").exposedHeaders("*")
 						.allowedOrigins("http://localhost:4200");

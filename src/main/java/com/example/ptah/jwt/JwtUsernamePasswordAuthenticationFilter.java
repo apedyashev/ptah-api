@@ -47,7 +47,7 @@ public class JwtUsernamePasswordAuthenticationFilter extends UsernamePasswordAut
 
         Integer tokenExpirationDays = jwtConfig.getTokenExpirationDays();
         String token = Jwts.builder()
-                // header (see jwt.io)
+                // see jwt.io
                 .setSubject(authResult.getName())
                 // payload (see jwt.io)
                 .claim("authorities", authResult.getAuthorities()).setIssuedAt(new Date())

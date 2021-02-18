@@ -2,11 +2,14 @@ package com.example.ptah.auth;
 
 import java.time.LocalDateTime;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
 import com.example.ptah.auth.dto.RegistrationRequest;
 import com.example.ptah.auth.dto.UserRole;
 import com.example.ptah.email.EmailSender;
+import com.example.ptah.exception.ValidationException;
+import com.example.ptah.jwt.JwtAuthenticationService;
 import com.example.ptah.user.User;
 import com.example.ptah.user.EmailValidationService;
 import com.example.ptah.user.UserService;
@@ -18,10 +21,12 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class AuthService {
+    private static String TOKEN_FIELD_NAME = "token";
     private final UserService userService;
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailValidationService emailValidator;
     private final EmailSender emailSender;
+    private final JwtAuthenticationService jwtAuthService;
 
     @Transactional
     public String register(RegistrationRequest request) {
@@ -34,36 +39,46 @@ public class AuthService {
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
-        user.setEnabled(true); // TODO:
+        user.setEnabled(false);
         user.setRole(UserRole.USER);
 
         String token = userService.signUpUser(user);
-        String link = "http://localhost:8090/api/v1/auth/confirm?token=" + token;
-        emailSender.send(request.getEmail(), buildEmail(request.getUsername(), link));
+        emailSender.send(request.getEmail(), buildEmail(request.getUsername(), token));
         return token;
     }
 
-    public String confirmToken(String token) {
+    public void confirmToken(String token, HttpServletResponse response) {
         ConfirmationToken confirmationToken = confirmationTokenService.getToken(token)
-                .orElseThrow(() -> new IllegalStateException("token not found"));
+                .orElseThrow(() -> new ValidationException(TOKEN_FIELD_NAME, "token not found"));
 
         if (confirmationToken.getConfirmedAt() != null) {
-            throw new IllegalStateException("email already confirmed");
+            throw new ValidationException(TOKEN_FIELD_NAME, "email already confirmed");
         }
 
         LocalDateTime expiredAt = confirmationToken.getExpiresAt();
 
         if (expiredAt.isBefore(LocalDateTime.now())) {
-            throw new IllegalStateException("token expired");
+            throw new ValidationException(TOKEN_FIELD_NAME, "token expired");
         }
 
         confirmationTokenService.setConfirmedAt(token);
         userService.enableUser(confirmationToken.getUser().getEmail());
 
-        return "confirmed";
+        User user = confirmationToken.getUser();
+        jwtAuthService.authenticate(user, response);
+        // try {
+        // Authentication auth = new UsernamePasswordAuthenticationToken(user, null,
+        // user.getAuthorities());
+        // SecurityContextHolder.getContext().setAuthentication(auth);
+        // System.out.println(auth.getName());
+        // } catch (Exception e) {
+        // System.out.println(e.getMessage());
+
+        // }
     }
 
     private String buildEmail(String name, String link) {
-        return "Hi " + name + ",</br>" + "please confirm your registration <a href=\"" + link + "\">" + link + "</a>";
+        return "Hi " + name + ",</br>" + "please confirm your registration with this code: " + link;
     }
+
 }

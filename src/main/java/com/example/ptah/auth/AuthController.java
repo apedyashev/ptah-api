@@ -1,5 +1,6 @@
 package com.example.ptah.auth;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import com.example.ptah.auth.dto.ConfirmTokenRequest;
@@ -30,8 +31,11 @@ public class AuthController {
     }
 
     @PostMapping("/confirm")
-    public String confirm(@Valid @NonNull @RequestBody ConfirmTokenRequest request) {
-        return authService.confirmToken(request.getToken());
+    public void confirm(@Valid @NonNull @RequestBody ConfirmTokenRequest request, HttpServletResponse response) {
+        authService.confirmToken(request.getToken(), response);
     }
+
+    // TODO: login action
+    // https://www.baeldung.com/spring-security-auto-login-user-after-registration#request
 
 }
