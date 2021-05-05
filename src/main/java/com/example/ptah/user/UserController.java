@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.NonNull;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/v1/users")
 public class UserController {
     public final UserService userService;
 
@@ -40,7 +40,7 @@ public class UserController {
     }
 
     @GetMapping("/me")
-    public Optional<User> getCurrentUser(Principal principal) {
-        return userService.findByUsername(principal.getName());
+    public User getCurrentUser(Principal principal) {
+        return userService.findByEmail(principal.getName()).orElseThrow(() -> new NotFoundException("User not found"));
     }
 }
