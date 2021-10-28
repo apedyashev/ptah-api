@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  api:
+    restart: always
+    build:
+      context: .
+    ports:
+      - 8090:8090
+      - 5005:5005
+    environment:
+      - SERVER_PORT=8090
+    volumes:
+      - ./:/app
+    command: ./mvnw spring-boot:run
+
+  postgres:
+    container_name: postgres
+    image: postgres:alpine
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - PGDATA=/data/postgres
+    volumes:
+      - data:/var/lib/postgresql/data
+volumes:
+  data:
